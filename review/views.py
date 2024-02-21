@@ -8,9 +8,9 @@ def index(request):
     return render(request, "base.html")
 
 
-def book_search(request):
+def movie_search(request):
     search_text = request.GET.get("search", "")
-    return render(request, "reviews/search-results.html", {"search_text": search_text})
+    return render(request, "search-results.html", {"search_text": search_text})
 
 
 def movie_list(request):
@@ -22,32 +22,32 @@ def movie_list(request):
             movie_rating = average_rating([review.rating for review in reviews])
             number_of_reviews = len(reviews)
         else:
-            movie_rating = None
+            movie_rating = 0
             number_of_reviews = 0
-        movie_list.append({'book': movie,
-                          'book_rating': movie_rating,
-                          'number_of_reviews': number_of_reviews})
+        movie_list.append({'movie': movie,
+                           'movie_rating': movie_rating,
+                           'number_of_reviews': number_of_reviews})
 
     context = {
-        'book_list': movie_list
+        'movie_list': movie_list
     }
     return render(request, 'movie_list.html', context)
 
 
-def book_detail(request, pk):
-    book = get_object_or_404(Movie, pk=pk)
-    reviews = book.rating_set.all()
+def movie_detail(request, pk):
+    movie = get_object_or_404(Movie, pk=pk)
+    reviews = movie.rating_set.all()
     if reviews:
-        book_rating = average_rating([review.rating for review in reviews])
+        movie_rating = average_rating([review.rating for review in reviews])
         context = {
-            "book": book,
-            "book_rating": book_rating,
+            "movie": movie,
+            "movie_rating": movie_rating,
             "reviews": reviews
         }
     else:
         context = {
-            "book": book,
-            "book_rating": None,
+            "movie": movie,
+            "movie_rating": None,
             "reviews": None
         }
-    return render(request, "reviews/book_detail.html", context)
+    return render(request, "movie_detail.html", context)

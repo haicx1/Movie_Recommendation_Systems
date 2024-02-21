@@ -1,0 +1,30 @@
+{% extends 'base.html' %}
+
+{% block content %}
+      <br>
+      <h3>Movie Details</h3>
+      <hr>
+      <span class="text-info">Title: </span> <span>{{ movie.title }}</span>
+      <br>
+      <span class="text-info">Genre: </span><span>{{ movie.genres }}</span>
+      <br>
+      {% if not reviews %}
+            <hr>
+            <h3>Be the first one to write a review.</h3>
+      {% else %}
+            <span class="text-info">Overall Rating: </span><span class="badge badge-primary badge-pill">{{ book_rating }}</span>
+            <br>
+            <hr>
+            <h3>Review Comments</h3>
+            <ul>
+            {% for review in reviews %}
+                  <li class="list-group-item">
+                        <span class="text-info">Review comment: </span> <span>very good</span>
+                        <br>
+                        <span class="text-info">Rating: </span><span class="badge badge-secondary badge-pill">{{ review.rating }}</span>
+                        <br>
+                  </li>
+            {% endfor %}
+            </ul>
+      {% endif %}
+{% endblock %}
