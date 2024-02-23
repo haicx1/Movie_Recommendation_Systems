@@ -18,7 +18,7 @@ cosine_sim_df = pd.DataFrame(cosine_sim, index=movies['title'], columns=movies['
 cosine_sim_df.sample(5, axis=1).round(2)
 
 
-def genre_recommendations(i, M, items, k=10):
+def genre_recommendations(movie_title, similarity_matrix, movie_data, k=5):
     """
     Recommends movies based on a similarity dataframe
 
@@ -32,12 +32,15 @@ def genre_recommendations(i, M, items, k=10):
         Contains both the title and some other features used to define similarity
     k : int
         Amount of recommendations to return
+        :param k:
+        :param movie_data:
+        :param similarity_matrix:
+        :param movie_title:
 
     """
-    ix = M.loc[:, i].to_numpy().argpartition(range(-1, -k, -1))
-    closest = M.columns[ix[-1:-(k + 2):-1]]
-    closest = closest.drop(i, errors='ignore')
-    return pd.DataFrame(closest).merge(items).head(k)
+    movie_row = similarity_matrix.loc[movie_title]
+    similar_movies = movie_row.sort_values(ascending=False)[1:k + 1].index.tolist()
+    return similar_movies
 
 
 def average_rating(rating_list):
@@ -47,4 +50,3 @@ def average_rating(rating_list):
     return round(sum(rating_list) / len(rating_list))
 
 
-print(genre_recommendations("Cats Don't Dance (1997)", cosine_sim_df, movies[['title', 'genres']]))

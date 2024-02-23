@@ -14,17 +14,13 @@
       {% else %}
             <span class="text-info">Overall Rating: </span><span class="badge badge-primary badge-pill">{{ movie_rating }}</span>
             <br>
-            <hr>
-            <h3>Review Comments</h3>
-            <ul>
-            {% for review in reviews %}
-                  <li class="list-group-item">
-                        <span class="text-info">Review comment: </span> <span>very good</span>
-                        <br>
-                        <span class="text-info">Rating: </span><span class="badge badge-secondary badge-pill">{{ review.rating }}</span>
-                        <br>
-                  </li>
-            {% endfor %}
-            </ul>
       {% endif %}
+            <h3>Movie Recommend</h3>
+    {% for r in r_list %}
+      <hr>
+      <span class="text-info">Title: </span> <span>{{ r.title }}</span>
+      <br>
+      <span class="text-info">Genre: </span><span>{{ r.genres }}</span>
+      <br>
+    {% endfor %}
 {% endblock %}
