@@ -1,8 +1,8 @@
 from django.shortcuts import render, get_object_or_404
 
-import utils
+import utils1
 from .models import Movie
-from utils import average_rating
+from utils1 import average_rating
 from django.core.paginator import Paginator
 
 
@@ -43,11 +43,11 @@ def movie_list(request):
 def movie_detail(request, pk):
     movie = get_object_or_404(Movie, pk=pk)
     reviews = movie.rating_set.all()
-    movie_r = utils.genre_recommendations(movie.title, utils.cosine_sim_df, utils.movies[['title', 'genres']], k=5)
-    r_list = []
+    movie_r = utils1.genre_recommendations(movie.title, k=5)
+    r_list = set()
     for name in movie_r:
         r = Movie.objects.filter(title__contains=name)
-        r_list.append(r)
+        r_list.add(r)
     if reviews:
         movie_rating = average_rating([review.rating for review in reviews])
         context = {
@@ -61,9 +61,8 @@ def movie_detail(request, pk):
             "movie": movie,
             "movie_rating": None,
             "reviews": None,
-            "r_list": None
+            "r_list": r_list
         }
     return render(request, "movie_detail.html", context)
-
 
 

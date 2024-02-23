@@ -16,11 +16,15 @@
             <br>
       {% endif %}
             <h3>Movie Recommend</h3>
-    {% for r in r_list %}
-      <hr>
-      <span class="text-info">Title: </span> <span>{{ r.title }}</span>
-      <br>
-      <span class="text-info">Genre: </span><span>{{ r.genres }}</span>
-      <br>
+<ul class="list-group">
+    {% for movie in r_list %}
+    <li class="list-group-item">
+        <span class="text-info">Title: </span> <span>{{ movie }}</span>
+        <br/>
+        <span class="text-info">Genres: </span> <span>{{ movie.genres }}</span>
+    </li>
+    {% empty %}
+    <li class="list-group-item">No results found.</li>
     {% endfor %}
+</ul>
 {% endblock %}
