@@ -2,6 +2,7 @@ from django.shortcuts import render, get_object_or_404
 
 from .models import Movie
 from .utils import average_rating
+from django.core.paginator import Paginator
 
 
 def index(request):
@@ -28,8 +29,12 @@ def movie_list(request):
                            'movie_rating': movie_rating,
                            'number_of_reviews': number_of_reviews})
 
+    paginator = Paginator(movie_list, 25)  # Show 25 contacts per page.
+
+    page_number = request.GET.get("page")
+    page_obj = paginator.get_page(page_number)
     context = {
-        'movie_list': movie_list
+        'movie_list': page_obj
     }
     return render(request, 'movie_list.html', context)
 
