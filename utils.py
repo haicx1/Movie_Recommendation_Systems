@@ -1,0 +1,50 @@
+from sklearn.feature_extraction.text import TfidfVectorizer
+from itertools import combinations
+from sklearn.metrics.pairwise import cosine_similarity
+import pandas as pd
+import sqlite3
+import os.path
+
+BASE_DIR = os.path.dirname(os.path.abspath(__file__))
+db_dir = (BASE_DIR + '\\db.sqlite3')
+cnx = sqlite3.connect(db_dir)
+movies = pd.read_sql_query("SELECT * FROM movie", cnx)
+
+tf = TfidfVectorizer(analyzer=lambda s: (c for i in range(1, 4)
+                                         for c in combinations(s.split('|'), r=i)))
+tfidf_matrix = tf.fit_transform(movies['genres'])
+cosine_sim = cosine_similarity(tfidf_matrix)
+cosine_sim_df = pd.DataFrame(cosine_sim, index=movies['title'], columns=movies['title'])
+cosine_sim_df.sample(5, axis=1).round(2)
+
+
+def genre_recommendations(i, M, items, k=10):
+    """
+    Recommends movies based on a similarity dataframe
+
+    Parameters
+    ----------
+    i : str
+        Movie (index of the similarity dataframe)
+    M : pd.DataFrame
+        Similarity dataframe, symmetric, with movies as indices and columns
+    items : pd.DataFrame
+        Contains both the title and some other features used to define similarity
+    k : int
+        Amount of recommendations to return
+
+    """
+    ix = M.loc[:, i].to_numpy().argpartition(range(-1, -k, -1))
+    closest = M.columns[ix[-1:-(k + 2):-1]]
+    closest = closest.drop(i, errors='ignore')
+    return pd.DataFrame(closest).merge(items).head(k)
+
+
+def average_rating(rating_list):
+    if not rating_list:
+        return 0
+
+    return round(sum(rating_list) / len(rating_list))
+
+
+print(genre_recommendations("Cats Don't Dance (1997)", cosine_sim_df, movies[['title', 'genres']]))

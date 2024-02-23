@@ -1,7 +1,7 @@
 from django.shortcuts import render, get_object_or_404
 
 from .models import Movie
-from .utils import average_rating
+from utils import average_rating
 from django.core.paginator import Paginator
 
 
