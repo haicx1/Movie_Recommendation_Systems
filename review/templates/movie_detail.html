@@ -1,6 +1,9 @@
 {% extends 'base.html' %}
 
 {% block content %}
+    <div class="clearfix">
+  <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fthanhnien.vn%2Fco-be-meme-tung-noi-tieng-tren-mang-xa-hoi-bay-gio-ra-sao-1851544052.htm&psig=AOvVaw3mW__qhx6cEFmaTovdopBK&ust=1708939252143000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCPCJxPmUxoQDFQAAAAAdAAAAABAE" class="col-md-6 float-md-end mb-3 ms-md-3" alt="...">
+
       <br>
       <h3>Movie Details</h3>
       <hr>
@@ -8,23 +11,27 @@
       <br>
       <span class="text-info">Genre: </span><span>{{ movie.genres }}</span>
       <br>
-      {% if not reviews %}
-            <hr>
-            <h3>Be the first one to write a review.</h3>
-      {% else %}
-            <span class="text-info">Overall Rating: </span><span class="badge badge-primary badge-pill">{{ movie_rating }}</span>
-            <br>
-      {% endif %}
-            <h3>Movie Recommend</h3>
-<ul class="list-group">
+</div>
+
+    <h3>Movie Recommend</h3>
+    <div class="row row-cols-1 row-cols-md-3 g-4">
     {% for movie in r_list %}
-    <li class="list-group-item">
-        <span class="text-info">Title: </span> <span>{{ movie }}</span>
-        <br/>
-        <span class="text-info">Genres: </span> <span>{{ movie.genres }}</span>
-    </li>
+        {% for m in movie %}
+ <div class="col">
+    <div class="card h-100">
+      <img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fopensea.io%2Fassets%2Fethereum%2F0x495f947276749ce646f68ac8c248420045cb7b5e%2F90386426052901588681616372686492698093957337993435002752835660684791818223617&psig=AOvVaw0yFs2fUVYg5OXD1VKEOiwX&ust=1708939522534000&source=images&cd=vfe&opi=89978449&ved=0CBIQjRxqFwoTCIjtvvqVxoQDFQAAAAAdAAAAABAJ" class="card-img-top" alt="...">
+      <div class="card-body">
+        <h5 class="card-title">Movie Title: </h5><h5>{{ m.title }}</h5>
+        <p class="card-text">Genre:</p><p>{{ m.genres }}</p>
+      </div>
+      <div class="card-footer">
+        <small class="text-body-secondary">Last updated 3 mins ago</small>
+      </div>
+    </div>
     {% empty %}
-    <li class="list-group-item">No results found.</li>
+    <h2>No results found.</h2>
+            {% endfor %}
     {% endfor %}
-</ul>
+    </div>
+    </div>
 {% endblock %}

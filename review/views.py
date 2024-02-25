@@ -46,7 +46,7 @@ def movie_detail(request, pk):
     movie_r = utils1.genre_recommendations(movie.title, k=5)
     r_list = set()
     for name in movie_r:
-        r = Movie.objects.filter(title__contains=name)
+        r = Movie.objects.filter(title__icontains=name)
         r_list.add(r)
     if reviews:
         movie_rating = average_rating([review.rating for review in reviews])

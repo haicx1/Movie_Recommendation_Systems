@@ -7,7 +7,7 @@ class Movie(models.Model):
     genres = models.TextField()
 
     def __str__(self):
-        return self.title
+        return f"{self.title} ({self.genres})"
 
     class Meta:
         managed = True
