@@ -11,8 +11,12 @@ def index(request):
 
 
 def movie_search(request):
-    search_text = request.GET.get("search", "")
-    return render(request, "search-results.html", {"search_text": search_text})
+    if request.method == "POST":
+        search_text = request.POST["search_text"]
+    movies = Movie.objects.filter(title__icontains=search_text)
+    context = {"movies": movies,
+               "search_text": search_text}
+    return render(request, "search-results.html", context)
 
 
 def movie_list(request):
@@ -64,5 +68,3 @@ def movie_detail(request, pk):
             "r_list": r_list
         }
     return render(request, "movie_detail.html", context)
-
-

@@ -1,10 +1,18 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>Search Results: {{ search_text }}</title>
-</head>
-<body>
-<h1>Search Results for <em>{{ search_text }}</em></h1>
-</body>
-</html>
+{% extends 'base.html' %}
+
+{% block content %}
+    <h3>Search Results for {{ search_text }}</h3>
+<ul class="list-group">
+  {% for movie in movies %}
+  <li class="list-group-item">
+      <span class="text-info">Title: </span> <span>{{ movie.title }}</span>
+      <br>
+      <span class="text-info">Genres: </span><span>{{ movie.genres }}</span>
+      <br>
+      <a class="btn btn-primary btn-sm active" role="button" href="{% url 'movie_detail' movie.pk %}">Details</a>
+  </li>
+          {% empty %}
+    <li class="list-group-item">No results found.</li>
+  {% endfor %}
+</ul>
+{% endblock %}
