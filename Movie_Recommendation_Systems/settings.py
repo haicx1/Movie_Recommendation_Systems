@@ -72,8 +72,8 @@ WSGI_APPLICATION = "Movie_Recommendation_Systems.wsgi.application"
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3', # This is where you put the name of the db file.
-                 # If one doesn't exist, it will be created at migration time.
+        'NAME': BASE_DIR / 'db.sqlite3',  # This is where you put the name of the db file.
+        # If one doesn't exist, it will be created at migration time.
     }
 }
 
