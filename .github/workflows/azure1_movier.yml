@@ -66,4 +66,4 @@ jobs:
         with:
           app-name: 'Movier'
           slot-name: 'Production'
-          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_9B2F90E3BD95477FACEBE1E46D17C02E }}
+          publish-profile: ${{ secrets.AZUREAPPSERVICE_PUBLISHPROFILE_86E3559A67CF4A6E8EB73D5119741927 }}
