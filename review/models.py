@@ -7,7 +7,6 @@ class Movie(models.Model):
     genres = models.TextField()
 
     class Meta:
-        managed = False
         db_table = 'movie'
 
 
@@ -18,7 +17,6 @@ class Rating(models.Model):
     timestamp = models.IntegerField(blank=True, null=True)
 
     class Meta:
-        managed = False
         db_table = 'rating'
 
 
@@ -32,5 +30,4 @@ class UserMovie(models.Model):
     occ_desc = models.TextField(blank=True, null=True)
 
     class Meta:
-        managed = False
         db_table = 'user_movie'
