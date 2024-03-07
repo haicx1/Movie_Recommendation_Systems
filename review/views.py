@@ -22,17 +22,7 @@ def movie_list(request):
     movies = Movie.objects.all()
     movie_list = []
     for movie in movies:
-        reviews = movie.rating_set.all()
-        if reviews:
-            movie_rating = average_rating([review.rating for review in reviews])
-            number_of_reviews = len(reviews)
-        else:
-            movie_rating = 0
-            number_of_reviews = 0
-        movie_list.append({'movie': movie,
-                           'movie_rating': movie_rating,
-                           'number_of_reviews': number_of_reviews})
-
+        movie_list.append({'movie': movie})
     context = {
         'movie_list': movie_list
     }
@@ -41,25 +31,13 @@ def movie_list(request):
 
 def movie_detail(request, pk):
     movie = get_object_or_404(Movie, pk=pk)
-    reviews = movie.rating_set.all()
-    movie_r = utils1.genre_recommendations(movie.title, k=5)
+#    movie_r = utils1.genre_recommendations(movie.title, k=5)
     r_list = set()
-    for name in movie_r:
-        r = Movie.objects.filter(title__icontains=name)
-        r_list.add(r)
-    if reviews:
-        movie_rating = average_rating([review.rating for review in reviews])
-        context = {
-            "movie": movie,
-            "movie_rating": movie_rating,
-            "reviews": reviews,
-            "r_list": r_list
-        }
-    else:
-        context = {
-            "movie": movie,
-            "movie_rating": None,
-            "reviews": None,
-            "r_list": r_list
-        }
+#    for name in movie_r:
+#        r = Movie.objects.filter(title__icontains=name)
+#        r_list.add(r)
+    context = {
+        "movie": movie,
+        "r_list": r_list
+    }
     return render(request, "movie_detail.html", context)
