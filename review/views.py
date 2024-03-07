@@ -31,11 +31,11 @@ def movie_list(request):
 
 def movie_detail(request, pk):
     movie = get_object_or_404(Movie, pk=pk)
-#    movie_r = utils1.genre_recommendations(movie.title, k=5)
+    movie_r = utils1.genre_recommendations(movie.title, k=5)
     r_list = set()
-#    for name in movie_r:
-#        r = Movie.objects.filter(title__icontains=name)
-#        r_list.add(r)
+    for name in movie_r:
+        r = Movie.objects.filter(title__icontains=name)
+        r_list.add(r)
     context = {
         "movie": movie,
         "r_list": r_list
