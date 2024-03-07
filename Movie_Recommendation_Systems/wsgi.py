@@ -11,8 +11,6 @@ import os
 
 from django.core.wsgi import get_wsgi_application
 
-settings_module = 'Movie_Recommendation_Systems.deployment' if 'WEBSITE_HOSTNAME' in os.environ else 'Movie_Recommendation_Systems.settings'
-
-os.environ.setdefault("DJANGO_SETTINGS_MODULE", settings_module)
+os.environ.setdefault("DJANGO_SETTINGS_MODULE", "Movie_Recommendation_Systems.settings")
 
 application = get_wsgi_application()
