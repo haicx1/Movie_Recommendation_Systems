@@ -6,7 +6,7 @@
   <div class="row g-0">
     <div class="col-md-4">
         {% load static %}
-      <img src="..." class="img-fluid rounded-start" alt="Cover">
+      <img src="{% static 'r.png' %}" class="img-fluid rounded-start" alt="Cover">
     </div>
     <div class="col-md-8">
       <div class="card-body">
@@ -23,7 +23,7 @@
         {% for m in movie %}
   <div class="col">
     <div class="card">
-      <img src="..." class="card-img-top" alt="Recommend Movie">
+      <img src="{% static 'r.png' %}" class="card-img-top" alt="Recommend Movie">
       <div class="card-body">
         <h5 class="card-title">Title:</h5><h5>{{ m.title }}</h5>
         <p class="card-text">Genres:</p><p>{{ m.genres }}</p>
@@ -32,8 +32,8 @@
   </div>
     {% empty %}
     <h2>No results found.</h2>
-                </div>
+
             {% endfor %}
     {% endfor %}
-
+</div>
 {% endblock %}
