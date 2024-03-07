@@ -8,7 +8,7 @@ from .settings import BASE_DIR
 
 load_dotenv(BASE_DIR / '.env')
 SECRET_KEY = os.environ['SECRET']
-ALLOWED_HOSTS = os.getenv('ALLOWED_HOSTS').split(' ')
+ALLOWED_HOSTS = [os.environ['WEBSITE_HOSTNAME']] if 'WEBSITE_HOSTNAME' in os.environ else []
 DEBUG = False
 CSRF_TRUSTED_ORIGINS = os.getenv('CSRF_TRUSTED_ORIGINS').split(' ')
 
