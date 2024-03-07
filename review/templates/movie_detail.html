@@ -5,8 +5,7 @@
 <div class="card mb-3" style="max-width: 540px;">
   <div class="row g-0">
     <div class="col-md-4">
-        {% load static %}
-      <img src="{% static 'cover.e79c94ef0a8e.jpg' %}" class="img-fluid rounded-start" alt="Cover">
+      <img src="..." class="img-fluid rounded-start" alt="Cover">
     </div>
     <div class="col-md-8">
       <div class="card-body">
@@ -18,12 +17,12 @@
   </div>
 </div>
     <h3>Movie Recommend</h3>
-<div class="row row-cols-1 row-cols-md-6 g-5">
+<div class="row row-cols-1 row-cols-md-5 g-5">
     {% for movie in r_list %}
         {% for m in movie %}
   <div class="col">
     <div class="card">
-      <img src="{% static 'cover.e79c94ef0a8e.jpg' %}" class="card-img-top" alt="Recommend Movie">
+      <img src="..." class="card-img-top" alt="Recommend Movie">
       <div class="card-body">
         <h5 class="card-title">Title:</h5><h5>{{ m.title }}</h5>
         <p class="card-text">Genres:</p><p>{{ m.genres }}</p>

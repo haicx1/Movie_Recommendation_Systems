@@ -23,4 +23,4 @@ urlpatterns = [
     path('', include('review.urls')),
     path('', review.views.index, name='index'),
     path('movie-search/', review.views.movie_search, name='movie_search'),
-]
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
