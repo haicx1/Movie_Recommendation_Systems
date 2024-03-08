@@ -1,3 +1,4 @@
+from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
 from django.shortcuts import render, get_object_or_404
 
 import utils1
@@ -20,11 +21,18 @@ def movie_search(request):
 
 def movie_list(request):
     movies = Movie.objects.all()
-    movie_list = []
-    for movie in movies:
-        movie_list.append({'movie': movie})
+    paginator = Paginator(movies, 25)
+    page_num = request.GET.get("page")
+    try:
+        page_obj = paginator.page(page_num)
+    except PageNotAnInteger:
+        # if page is not an integer, deliver the first page
+        page_obj = paginator.page(1)
+    except EmptyPage:
+        # if the page is out of range, deliver the last page
+        page_obj = paginator.page(paginator.num_pages)
     context = {
-        'movie_list': movie_list
+        'movie_list': page_obj
     }
     return render(request, 'movie_list.html', context)
 

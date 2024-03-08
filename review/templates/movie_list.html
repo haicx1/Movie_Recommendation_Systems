@@ -4,16 +4,29 @@
 <ul class="list-group">
   {% for item in movie_list %}
   <li class="list-group-item">
-      <span class="text-info">Title: </span> <span>{{ item.movie.title }}</span>
+      <span class="text-info">Title: </span> <span>{{ item.title }}</span>
       <br>
-      <span class="text-info">Genres: </span><span>{{ item.movie.genres }}</span>
+      <span class="text-info">Genres: </span><span>{{ item.genres }}</span>
       <br>
       {% if item.movie_rating is null %}
       <span class="text-secondary">Provide a rating and write the first review for this movie.</span>
       <br>
       {% endif %}
-      <a class="btn btn-primary btn-sm active" role="button" href="{% url 'movie_detail' item.movie.pk %}">Details</a>
+      <a class="btn btn-primary btn-sm active" role="button" href="{% url 'movie_detail' item.pk %}">Details</a>
   </li>
   {% endfor %}
 </ul>
+    <div>
+  <span>
+    {% if movie_list.has_previous %}
+      <a href="?page={{ movie_list.previous_page_number }}">Previous</a>
+    {% endif %}
+    <span>
+      Page {{ movie_list.number }} of {{ movie_list.paginator.num_pages }}.
+    </span>
+    {% if movie_list.has_next %}
+      <a href="?page={{ movie_list.next_page_number }}">Next</a>
+    {% endif %}
+  </span>
+</div>
 {% endblock %}
