@@ -32,7 +32,7 @@ def movie_list(request):
         # if the page is out of range, deliver the last page
         page_obj = paginator.page(paginator.num_pages)
     context = {
-        'movie_list': page_obj
+        'page_obj': page_obj
     }
     return render(request, 'movie_list.html', context)
 
