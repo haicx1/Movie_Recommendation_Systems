@@ -9,10 +9,10 @@
       <span class="text-info">Genres: </span><span>{{ item.movie.genres }}</span>
       <br>
       {% if item.movie_rating is null %}
-      <span class="text-secondary">Provide a rating and write the first review for this book.</span>
+      <span class="text-secondary">Provide a rating and write the first review for this movie.</span>
       <br>
       {% endif %}
-      <a class="btn btn-primary btn-sm active" role="button" href="{% url 'movie_detail' item.movie.pk %}">Reviews</a>
+      <a class="btn btn-primary btn-sm active" role="button" href="{% url 'movie_detail' item.movie.pk %}">Details</a>
   </li>
   {% endfor %}
 </ul>
